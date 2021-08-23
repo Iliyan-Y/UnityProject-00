@@ -8,13 +8,14 @@ public class Dino : MonoBehaviour
     [SerializeField]
     private float moveForce = 10f;
     [SerializeField]
-    private float jumpForce = 11f;  
+    private float jumpForce = 5f;  
     private float movementX;
     
     private Rigidbody2D myBody;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     private string WALK_ANIMATION = "Walk";
+    private bool isGrounded = true;
 
      private void Awake() {
         myBody = GetComponent<Rigidbody2D>();
@@ -33,6 +34,7 @@ public class Dino : MonoBehaviour
     {
         PlayerMoveKeyboard();
         AnimatePlayer();
+        PlayerJump();
         
     }
 
@@ -42,7 +44,6 @@ public class Dino : MonoBehaviour
     }
 
     void AnimatePlayer() {
-
         if (movementX > 0) {
             animator.SetBool(WALK_ANIMATION,true);
             spriteRenderer.flipX = false; 
@@ -51,6 +52,19 @@ public class Dino : MonoBehaviour
             spriteRenderer.flipX = true; 
         } else {
             animator.SetBool(WALK_ANIMATION, false);
+        }
+    }
+
+    void PlayerJump() {
+        if (Input.GetButtonDown("Jump") && isGrounded) {
+            isGrounded = false;
+            myBody.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+        } 
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.CompareTag("Ground")) { 
+            isGrounded = true;
         }
     }
 
