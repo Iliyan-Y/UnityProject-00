@@ -32,12 +32,26 @@ public class Dino : MonoBehaviour
     void Update()
     {
         PlayerMoveKeyboard();
+        AnimatePlayer();
         
     }
 
     void PlayerMoveKeyboard() {
         movementX = Input.GetAxisRaw("Horizontal");
         transform.position += new Vector3(movementX, 0f, 0f) * Time.deltaTime * moveForce;
+    }
+
+    void AnimatePlayer() {
+
+        if (movementX > 0) {
+            animator.SetBool(WALK_ANIMATION,true);
+            spriteRenderer.flipX = false; 
+        } else if (movementX < 0) {
+            animator.SetBool(WALK_ANIMATION,true);
+            spriteRenderer.flipX = true; 
+        } else {
+            animator.SetBool(WALK_ANIMATION, false);
+        }
     }
 
 }
