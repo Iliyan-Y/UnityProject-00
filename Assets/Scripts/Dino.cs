@@ -34,8 +34,10 @@ public class Dino : MonoBehaviour
     {
         PlayerMoveKeyboard();
         AnimatePlayer();
+    }
+
+    private void FixedUpdate() {
         PlayerJump();
-        
     }
 
     void PlayerMoveKeyboard() {

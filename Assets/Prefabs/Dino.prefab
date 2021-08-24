@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 61490327618123657}
   m_Layer: 0
   m_Name: Dino
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
